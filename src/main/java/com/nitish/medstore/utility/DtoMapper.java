@@ -30,6 +30,7 @@ public class DtoMapper {
         productResponseDto.setProductPrice(productDetails.getProductPrice().toString());
         productResponseDto.setProductUploadDate(productDetails.getProductUploadDate());
         productResponseDto.setProductUploadTime(productDetails.getProductUploadTime());
+        productResponseDto.setProductImageData(productDetails.getProductImageData());
 
         return productResponseDto;
     }

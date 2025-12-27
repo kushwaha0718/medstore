@@ -20,6 +20,8 @@ public class ProductDetails {
     private Long productId;
 
     private String productName;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String productDescription;
     private Double productPrice;
 
@@ -30,4 +32,9 @@ public class ProductDetails {
     @Column(columnDefinition = "TIME(0)")
     private LocalTime productUploadTime;
 
+    private String productImageName;
+    private String productImageType;
+
+    @Lob
+    private byte[] productImageData;
 }

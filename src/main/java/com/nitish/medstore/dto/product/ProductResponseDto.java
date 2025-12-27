@@ -16,5 +16,7 @@ public class ProductResponseDto {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh-mm-ss")
     private LocalTime productUploadTime;
+
+    private byte[] productImageData;
 }
 
