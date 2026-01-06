@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 @Entity
 @Data
@@ -31,6 +30,9 @@ public class ProductDetails {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh-mm-ss")
     @Column(columnDefinition = "TIME(0)")
     private LocalTime productUploadTime;
+    private String productUnit;
+    private String productManufacturer;
+    private String productStrength;
 
     private String productImageName;
     private String productImageType;

@@ -19,6 +19,9 @@ public class DtoMapper {
         product.setProductPrice(productRequestDto.getProductPrice());
         product.setProductUploadDate(LocalDate.now());
         product.setProductUploadTime(LocalTime.now());
+        product.setProductUnit(productRequestDto.getProductUnit());
+        product.setProductManufacturer(productRequestDto.getProductManufacturer());
+        product.setProductStrength(productRequestDto.getProductStrength());
 
         return product;
     }
@@ -31,6 +34,9 @@ public class DtoMapper {
         productResponseDto.setProductUploadDate(productDetails.getProductUploadDate());
         productResponseDto.setProductUploadTime(productDetails.getProductUploadTime());
         productResponseDto.setProductImageData(productDetails.getProductImageData());
+        productResponseDto.setProductUnit(productDetails.getProductUnit());
+        productResponseDto.setProductManufacturer(productDetails.getProductManufacturer());
+        productResponseDto.setProductStrength(productDetails.getProductStrength());
 
         return productResponseDto;
     }

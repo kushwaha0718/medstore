@@ -13,7 +13,9 @@ public class ProductResponseDto {
     private String productPrice;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy")
     private LocalDate productUploadDate;
-
+    private String productUnit;
+    private String productManufacturer;
+    private String productStrength;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh-mm-ss")
     private LocalTime productUploadTime;
 
