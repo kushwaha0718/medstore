@@ -69,7 +69,25 @@ public class ProductController {
             productService.deleteProduct(productId);
             return ResponseEntity.ok(Map.of("message","Product Deleted Successfully"));
         } catch (NoProductFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("message",e.getMessage()));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message",e.getMessage()));
+        }
+    }
+
+     @GetMapping("/get-all-marked-products")
+    public ResponseEntity<List<ProductResponseDto>> getAllMarkedProducts() {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(productService.getAllMarkedProducts());
+    }
+
+    @PutMapping("/toggle-marked")
+    public ResponseEntity<?> toggleMarkedProduct(@RequestParam Long productId) {
+        try{
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(Map.of("message",productService.toggleMarked(productId)));
+        }catch (NoProductFoundException e){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(Map.of("message",e.getMessage()));
         }
     }
 }

@@ -33,6 +33,7 @@ public class ProductDetails {
     private String productUnit;
     private String productManufacturer;
     private String productStrength;
+    private boolean productMarkedStar;
 
     private String productImageName;
     private String productImageType;

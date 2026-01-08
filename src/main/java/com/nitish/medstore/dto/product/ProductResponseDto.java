@@ -16,6 +16,7 @@ public class ProductResponseDto {
     private String productUnit;
     private String productManufacturer;
     private String productStrength;
+    private boolean productMarkedStar;
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "hh-mm-ss")
     private LocalTime productUploadTime;
 

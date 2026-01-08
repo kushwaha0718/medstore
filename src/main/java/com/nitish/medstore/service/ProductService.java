@@ -81,4 +81,28 @@ public class ProductService {
         }else
             throw new NoProductFoundException("Product with id " + productId + " not found");
     }
+
+    public List<ProductResponseDto> getAllMarkedProducts() {
+        List<ProductDetails> allProducts = productDetailsRepo.findAll();
+        List<ProductResponseDto> markedProducts = new ArrayList<>();
+        if (!allProducts.isEmpty()){
+            for (ProductDetails productDetails : allProducts) {
+                if(productDetails.isProductMarkedStar())
+                    markedProducts.add(DtoMapper.convertToProductResponseDto(productDetails));
+            }
+        }
+        return markedProducts;
+    }
+
+    @Transactional
+    public boolean toggleMarked(Long productId) {
+        ProductDetails product = productDetailsRepo.findById(productId).orElse(null);
+        if (product != null) {
+            product.setProductMarkedStar(!product.isProductMarkedStar());
+            productDetailsRepo.save(product);
+            return product.isProductMarkedStar();
+        }else {
+            throw new NoProductFoundException("Product with id " + productId + " not found");
+        }
+    }
 }
