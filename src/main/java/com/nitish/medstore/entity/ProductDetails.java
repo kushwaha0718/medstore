@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -40,4 +41,12 @@ public class ProductDetails {
 
     @Lob
     private byte[] productImageData;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "product_categories",
+            joinColumns = @JoinColumn(name = "product_id")
+    )
+    @Column(name = "category")
+    private List<Integer> categories;
 }

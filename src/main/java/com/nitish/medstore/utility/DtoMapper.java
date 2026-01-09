@@ -23,6 +23,7 @@ public class DtoMapper {
         product.setProductManufacturer(productRequestDto.getProductManufacturer());
         product.setProductStrength(productRequestDto.getProductStrength());
         product.setProductMarkedStar(false);
+        product.setCategories(productRequestDto.getCategories());
 
         return product;
     }
@@ -39,6 +40,7 @@ public class DtoMapper {
         productResponseDto.setProductManufacturer(productDetails.getProductManufacturer());
         productResponseDto.setProductStrength(productDetails.getProductStrength());
         productResponseDto.setProductMarkedStar(productDetails.isProductMarkedStar());
+        productResponseDto.setCategories(productDetails.getCategories());
 
         return productResponseDto;
     }
