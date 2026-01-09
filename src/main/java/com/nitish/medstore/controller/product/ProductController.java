@@ -54,14 +54,19 @@ public class ProductController {
         }
     }
 
-//    @PutMapping("/update-product/{productId}")
-//    public ResponseEntity<String> updateProduct(@PathVariable("productId") Long productId,@RequestBody){
-//        try{
-//            productService.updateProduct(productId);
-//        }catch (Exception e){
-//
-//        }
-//    }
+    @PatchMapping("/update-product/{productId}")
+    public ResponseEntity<?> updateProduct(
+            @PathVariable Long productId,
+            @ModelAttribute ProductRequestDto productRequestDto,
+            @RequestPart(required = false) MultipartFile productImage
+    ) {
+        try {
+            return ResponseEntity.ok(productService.updateProduct(productId,productRequestDto, productImage));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(e.getMessage());
+        }
+    }
+
 
     @DeleteMapping("/delete-product/{productId}")
     public ResponseEntity<?> deleteProduct(@PathVariable Long productId) {

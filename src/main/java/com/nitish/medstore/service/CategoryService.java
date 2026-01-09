@@ -21,6 +21,12 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
+    public String getCategoryNameById(Integer categoryId) {
+        return categoryRepository.findById(categoryId)
+                .map(Category::getCategoryName)
+                .orElse("Unknown");
+    }
+
     @Transactional
     public String addCategory(String categoryName) {
         String name = categoryName.trim();

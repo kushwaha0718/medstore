@@ -9,6 +9,7 @@ import java.util.List;
 
 @Data
 public class ProductResponseDto {
+    private Long productId;
     private String productName;
     private String productDescription;
     private String productPrice;

@@ -11,5 +11,4 @@ public class AdminResponseDto {
     private String adminUserName;
     private String adminName;
     private String adminEmail;
-    private String adminPassword;
 }

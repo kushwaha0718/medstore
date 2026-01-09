@@ -1,7 +1,9 @@
 package com.nitish.medstore.utility;
 
+import com.nitish.medstore.dto.product.AdminResponseDto;
 import com.nitish.medstore.dto.product.ProductRequestDto;
 import com.nitish.medstore.dto.product.ProductResponseDto;
+import com.nitish.medstore.entity.AdminData;
 import com.nitish.medstore.entity.ProductDetails;
 
 
@@ -30,6 +32,7 @@ public class DtoMapper {
 
     public static ProductResponseDto convertToProductResponseDto(ProductDetails productDetails) {
         ProductResponseDto productResponseDto = new ProductResponseDto();
+        productResponseDto.setProductId(productDetails.getProductId());
         productResponseDto.setProductName(productDetails.getProductName());
         productResponseDto.setProductDescription(productDetails.getProductDescription());
         productResponseDto.setProductPrice(productDetails.getProductPrice().toString());
@@ -43,5 +46,14 @@ public class DtoMapper {
         productResponseDto.setCategories(productDetails.getCategories());
 
         return productResponseDto;
+    }
+
+    public static AdminResponseDto convertToAdminResponseDto(AdminData admin) {
+        AdminResponseDto adminResponseDto = new AdminResponseDto();
+        adminResponseDto.setAdminName(admin.getAdminName());
+        adminResponseDto.setAdminEmail(admin.getAdminEmail());
+        adminResponseDto.setAdminUserName(admin.getAdminUserName());
+
+        return adminResponseDto;
     }
 }

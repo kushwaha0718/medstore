@@ -57,13 +57,48 @@ public class ProductService {
         }
     }
 
-//    @Transactional
-//    public void updateProduct(Long productId) {
-//        ProductDetails productDetails = productDetailsRepo.findById(productId).orElse(null);
-//        if(productDetails != null) {
-//
-//        }
-//    }
+    @Transactional
+    public String updateProduct(Long productId, ProductRequestDto dto, MultipartFile productImage) throws Exception {
+
+        ProductDetails product = productDetailsRepo.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        // Update fields (only if provided)
+        if (dto.getProductName() != null)
+            product.setProductName(dto.getProductName());
+
+        if (dto.getProductDescription() != null)
+            product.setProductDescription(dto.getProductDescription());
+
+        if (dto.getProductPrice() != null)
+            product.setProductPrice(dto.getProductPrice());
+
+        if (dto.getProductUnit() != null)
+            product.setProductUnit(dto.getProductUnit());
+
+        if (dto.getProductManufacturer() != null)
+            product.setProductManufacturer(dto.getProductManufacturer());
+
+        if (dto.getProductStrength() != null)
+            product.setProductStrength(dto.getProductStrength());
+
+        // Update categories only if list provided
+        if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
+            product.setCategories(dto.getCategories());  // List<Integer>
+        }
+
+        // Optional image update
+        if (productImage != null && !productImage.isEmpty()) {
+            product.setProductImageData(productImage.getBytes());
+        }
+
+        productDetailsRepo.save(product);
+
+        return "Product updated successfully";
+    }
+
+
+
 
     public ProductResponseDto getProductById(Long productID) {
         ProductDetails productDetails = productDetailsRepo.findById(productID).orElse(null);

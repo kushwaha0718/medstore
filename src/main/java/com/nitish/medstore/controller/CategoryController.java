@@ -24,6 +24,11 @@ public class CategoryController {
                 .body(categoryService.getAll());
     }
 
+    @GetMapping("/get-category-name/{categoryId}")
+    public ResponseEntity<?> getCategoryName(@PathVariable Integer categoryId) {
+        return ResponseEntity.ok(categoryService.getCategoryNameById(categoryId));
+    }
+
     @PostMapping("/add/{categoryName}")
     public ResponseEntity<?> addCategory(@PathVariable String categoryName){
         return ResponseEntity.status(HttpStatus.OK)
