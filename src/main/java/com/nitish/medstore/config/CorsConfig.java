@@ -14,11 +14,8 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins(
-                                "http://localhost:5173",
-                                "https://medstore-frontend.onrender.com"
-                        )
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
+                        .allowedOriginPatterns("*") 
+                        .allowedMethods("*")
                         .allowedHeaders("*")
                         .allowCredentials(false);
             }
