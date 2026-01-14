@@ -2,6 +2,7 @@ package com.nitish.medstore.service;
 
 import com.nitish.medstore.dto.product.ProductRequestDto;
 import com.nitish.medstore.dto.product.ProductResponseDto;
+import com.nitish.medstore.entity.ProductCategory;
 import com.nitish.medstore.entity.ProductDetails;
 import com.nitish.medstore.exceptions.InvalidInputException;
 import com.nitish.medstore.exceptions.NoProductFoundException;
@@ -83,9 +84,18 @@ public class ProductService {
             product.setProductStrength(dto.getProductStrength());
 
         // Update categories only if list provided
-        if (dto.getCategories() != null && !dto.getCategories().isEmpty()) {
-            product.setCategories(dto.getCategories());  // List<Integer>
+        if (dto.getCategories() != null) {
+
+            product.getCategories().clear(); // orphanRemoval = true
+
+            List<ProductCategory> updatedCategories = dto.getCategories()
+                    .stream()
+                    .map(cat -> new ProductCategory(null, product, cat))
+                    .toList();
+
+            product.getCategories().addAll(updatedCategories);
         }
+
 
         // Optional image update
         if (productImage != null && !productImage.isEmpty()) {
