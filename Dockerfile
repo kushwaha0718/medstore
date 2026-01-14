@@ -1,21 +1,28 @@
-# Use Java 17
-FROM eclipse-temurin:17-jdk-alpine
+# -----------------------------
+# Stage 1: Build the application
+# -----------------------------
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 
-# Set working directory
 WORKDIR /app
 
-# Copy pom.xml and download dependencies
-COPY pom.xml .
-RUN ./mvnw dependency:go-offline || true
-
-# Copy source code
+# Copy everything
 COPY . .
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+# Build the project
+RUN mvn clean package -DskipTests
 
-# Expose port (Render provides PORT dynamically)
+# -----------------------------
+# Stage 2: Run the application
+# -----------------------------
+FROM eclipse-temurin:17-jdk-alpine
+
+WORKDIR /app
+
+# Copy built jar from stage 1
+COPY --from=build /app/target/*.jar app.jar
+
+# Expose (Render sets PORT env variable at runtime)
 EXPOSE 8080
 
-# Run the app
-CMD ["java", "-jar", "target/*.jar"]
+# Run using Render's PORT
+CMD ["sh", "-c", "java -jar app.jar --server.port=$PORT"]
